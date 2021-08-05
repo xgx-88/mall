@@ -1,10 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Home from "@/views/home/Home.vue";
 Vue.use(VueRouter);
-const More = () => import("../views/More.vue");
-const Shopcart = () => import("../views/Shopcart.vue");
-const Profile = () => import("../views/Profile.vue");
+const More = () => import("@/views/more/More.vue");
+const Shopcart = () => import("@/views/shopcart/Shopcart.vue");
+const Profile = () => import("@/views/profile/Profile.vue");
 const routes = [
   {
     path: "",

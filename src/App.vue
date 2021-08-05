@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import mainTab from "./components/tabbar/mainTab.vue";
+import mainTab from "@/components/common/tabbar/mainTab.vue";
 export default {
   components: {
     mainTab,
