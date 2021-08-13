@@ -36,7 +36,7 @@ export default {
     },
     moveRatio: {
       type: Number,
-      default: 0.25,
+      default: 0.3,
     },
     showIndicator: {
       type: Boolean,
@@ -49,30 +49,30 @@ export default {
       totalWidth: 0, // swiper的宽度
       swiperStyle: {}, // swiper 样式
       currentIndex: 1, // 当前的index
-      scrolling: false, // 是否正在滚动
+      scrolling: true, // 是否正在滚动
     };
   },
   mounted: function () {
     // 1.操作dom,前后添加slide
     setTimeout(() => {
-      this.hanleDom();
+      this.handleDom();
       // 2. 开启定时器
       this.startTimer();
     }, 100);
   },
   methods: {
     // 定时器操作
-    startTimer: function () {
+    startTimer() {
       this.playTimer = window.setInterval(() => {
         this.currentIndex++;
         this.scrollContent(-this.currentIndex * this.totalWidth);
       }, this.interval);
     },
-    stopTimer: function () {
+    stopTimer() {
       window.clearInterval(this.playTimer);
     },
     // 滚动到正确的位置
-    scrollContent: function (currentPosition) {
+    scrollContent(currentPosition) {
       // 设置正在滚动
       this.scrolling = true;
       // 开始滚动动画
@@ -83,7 +83,7 @@ export default {
       //滚动完成
       this.scrolling = false;
     },
-    checkPosition: function () {
+    checkPosition() {
       window.setTimeout(() => {
         // 1. 校验正确的位置
         this.swiperStyle.transition = "0ms";
@@ -104,7 +104,7 @@ export default {
       this.swiperStyle["-ms-transform"] = `translate3d(${position}px),0,0`;
     },
     // 操作dom,在dom前后添加slide
-    handleDom: function () {
+    handleDom() {
       // 1. 获取要操作的元素
       let swiperEl = document.querySelector(".swiper");
       let slideEls = swiperEl.getElementsByClassName("slide");
@@ -123,7 +123,7 @@ export default {
       this.setTransform(-this.totalWidth);
     },
     // 5.拖动事件的处理
-    touchStart: function (e) {
+    touchStart(e) {
       // 1.如果正滚动,不可以拖动
       if (this.scrolling) return;
       // 2.停止定时器
@@ -131,7 +131,7 @@ export default {
       // 3. 保存开始滚动的位置
       this.startX = e.touches[0].pageX;
     },
-    touchMove: function (e) {
+    touchMove(e) {
       // 1.计算出用户拖动的距离
       this.currentX = e.touches[0].pageX;
       this.distance = this.currentX - this.startX;
@@ -140,7 +140,7 @@ export default {
       // 2. 设置当前的位置
       this.setTransform(moveDistance);
     },
-    touchEnd: function () {
+    touchEnd() {
       // 1. 获取移动的举例
       let currentMove = Math.abs(this.distance);
       //2.判断最终的距离
@@ -195,14 +195,15 @@ export default {
   justify-content: center;
   position: absolute;
   width: 100%;
-  bottom: 8px;
+  /* // bottom: 8px; */
+  top: 220px;
 }
 .indi-item {
   box-sizing: border-box;
   width: 8px;
   height: 8px;
   border-radius: 4px;
-  background-color: #fff;
+  background-color: greenyellow;
   line-height: 8px;
   text-align: center;
   font-size: 12px;
